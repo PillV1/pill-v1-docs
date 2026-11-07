@@ -1,4 +1,4 @@
-# Pill V1 · Documentation
+# Pill V1 · Project & Documentation
 
 **Old is gold. Bringing the early days home.**
 
@@ -17,6 +17,16 @@ Read the **[complete launch guide](LAUNCH-GUIDE.md)**.
 | New School | Native Pump Holder Rewards launches. Pump's native rules apply. |
 | onepill mode | Five-chain launches powered by Pangea, with separate contracts and pools. Pill trading uses the Solana pool. |
 
+## Explore the project
+
+- **[Download the project source](pill-v1-source.zip)** — contracts, SDK, backend/indexer, frontend and tests, with original folder structure.
+- **[Project map](PROJECT-MAP.md)** — where each component lives in the archive.
+- **[Routes and integrations](INTEGRATIONS.md)** — Pangea, native Pump and custom PumpSwap migration.
+- **[Publication scope](PUBLICATION-NOTES.md)** — what is included, excluded and checked.
+- **[Source checksums](SHA256SUMS.txt)** — file integrity manifest.
+
+The source is supplied as a ZIP snapshot; extract it to browse the code. Private configuration, credentials and operational data are not included.
+
 ## Find an answer
 
 - [Choose your route](LAUNCH-GUIDE.md#choose-your-route)
@@ -34,7 +44,7 @@ Read the **[complete launch guide](LAUNCH-GUIDE.md)**.
 
 ## Documentation status
 
-This is a documentation-only repository, not a contract source-code release or a security audit. The guide is dated **6 November 2026**; packaging it for GitHub does not constitute a fresh production verification. Its operational-readiness notes remain part of the guide.
+This repository includes a curated public source snapshot and documentation. Publication is not a security audit or a deployed-binary verification. The guide is dated **6 November 2026**; packaging it for GitHub does not constitute a fresh production verification. Its operational-readiness notes remain part of the guide.
 
 Fees and rules differ by route. Read the coin's verified settings and transaction quote. Pill-first trading does not make transactions private or guarantee that automated trading is impossible.
 
