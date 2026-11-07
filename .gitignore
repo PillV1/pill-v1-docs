@@ -1,0 +1,10 @@
+node_modules/
+target/
+.env*
+*.keypair.json
+*.pem
+*.db
+*.sqlite*
+artifacts/
+deploy/
+.wrangler/
