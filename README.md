@@ -1,51 +1,55 @@
-# Pill V1 · Project & Documentation
+<p align="center">
+  <img src="docs/assets/pill-v1.svg" width="88" alt="Pill V1" />
+</p>
 
-**Old is gold. Bringing the early days home.**
+<h1 align="center">Pill V1</h1>
+<p align="center"><strong>Old is gold. Bringing the early days home.</strong></p>
+<p align="center"><a href="https://pillv1.fun">Website</a> · <a href="docs/README.md">Documentation</a> · <a href="https://x.com/PillV1dotfun">Official X</a></p>
 
-Pill brings three launch routes onto one community board: Old School, New School and onepill mode. This repository explains how they differ, what each route supports, and what users should check before launching or trading.
+Pill brings custom bonding curves, native Pump Holder Rewards and Pangea five-chain launches onto one community board. This repository contains the public project source and documentation.
 
-[Website](https://pillv1.fun) · [Launch](https://pillv1.fun/launch) · [Official X](https://x.com/PillV1dotfun)
+## Launch routes
 
-## Start here
+| Route | Launch and trading model | Learn more |
+| --- | --- | --- |
+| **Old School · Classic V1** | Pill's custom Solana curve with fixed rules; PumpSwap graduation. | [Launch guide](docs/launch-guide.md#choose-your-route) |
+| **Old School · V1.1** | Custom curve with configurable features, custody and lock rules. | [Rules and fees](docs/launch-guide.md#fees-before-and-after-migration) |
+| **New School** | Native Pump Holder Rewards, using Pump's native configuration. | [Pump integration](docs/integrations.md#new-school-native-pump-holder-rewards) |
+| **onepill mode** | Standard five-chain launches through Pangea; Pill trading uses the Solana pool. | [Pangea integration](docs/integrations.md#onepill-mode-pangea) |
 
-Read the **[complete launch guide](LAUNCH-GUIDE.md)**.
+## Explore the code
 
-| Route | How it works |
+| Directory | Contents |
 | --- | --- |
-| Old School · Classic V1 | Pill's custom bonding curve with fixed launch rules. |
-| Old School · V1.1 | Pill's custom bonding curve with additional configurable features. |
-| New School | Native Pump Holder Rewards launches. Pump's native rules apply. |
-| onepill mode | Five-chain launches powered by Pangea, with separate contracts and pools. Pill trading uses the Solana pool. |
+| [programs/launchpad](programs/launchpad) | Anchor contracts, Classic/V1.1 trading, migration and settlement |
+| [crates/launch-core](crates/launch-core) | Curve arithmetic, fee calculations and vesting |
+| [sdk/src](sdk/src) | Account readers, quotes and instruction builders |
+| [services/api](services/api) | Launch/trade APIs, native Pump and Pangea integrations |
+| [services/indexer](services/indexer) | Chain ingestion, market projections and workflow state |
+| [website](website) | Frontend, wallet signing, charts and route integration |
+| [tests](tests) | JavaScript test sources; Rust and Python tests also live beside their modules |
+| [docs](docs) | User guide, architecture, integrations and development notes |
 
-## Explore the project
+## Documentation
 
-- **[Download the project source](pill-v1-source.zip)** — contracts, SDK, backend/indexer, frontend and tests, with original folder structure.
-- **[Project map](PROJECT-MAP.md)** — where each component lives in the archive.
-- **[Routes and integrations](INTEGRATIONS.md)** — Pangea, native Pump and custom PumpSwap migration.
-- **[Publication scope](PUBLICATION-NOTES.md)** — what is included, excluded and checked.
-- **[Source checksums](SHA256SUMS.txt)** — file integrity manifest.
+- **[Start here](docs/README.md)** — choose the guide for your task.
+- **[Launch guide](docs/launch-guide.md)** — fees, developer buys, locks, limits, milestones and migration.
+- **[Architecture](docs/architecture.md)** — component responsibilities and source links.
+- **[Integrations](docs/integrations.md)** — custom PumpSwap graduation, native Pump and Pangea.
+- **[Development](docs/development.md)** — dependencies, local checks and fixture requirements.
+- **[Source scope](docs/source-scope.md)** — publication checks and intentionally excluded operational files.
 
-The source is supplied as a ZIP snapshot; extract it to browse the code. Private configuration, credentials and operational data are not included.
+## Development
 
-## Find an answer
+Requires Node.js 22.13+ for the backend and a Rust toolchain for the on-chain code. Dependency versions are pinned in the project manifests. See [development setup](docs/development.md) before running the integration tests.
 
-- [Choose your route](LAUNCH-GUIDE.md#choose-your-route)
-- [onepill mode and Pangea](LAUNCH-GUIDE.md#onepill-mode--powered-by-pangea)
-- [Holder Rewards](LAUNCH-GUIDE.md#what-holder-rewards-means)
-- [Fees before and after migration](LAUNCH-GUIDE.md#fees-before-and-after-migration)
-- [Launching and developer buys](LAUNCH-GUIDE.md#launching-and-the-optional-developer-buy)
-- [Per-wallet limits](LAUNCH-GUIDE.md#per-wallet-launch-and-upload-limits)
-- [The piLL mint suffix](LAUNCH-GUIDE.md#the-pill-mint-suffix)
-- [Trading and charts](LAUNCH-GUIDE.md#trading-balances-and-charts)
-- [King of the Hill](LAUNCH-GUIDE.md#king-of-the-hill-and-bump-order)
-- [Migration and liquidity](LAUNCH-GUIDE.md#migration-and-liquidity)
-- [Developer locks and Quick Mode](LAUNCH-GUIDE.md#developer-locks-and-quick-mode)
-- [Operational readiness](LAUNCH-GUIDE.md#operational-readiness)
+```sh
+pnpm install
+cargo test -p launch-core
+```
 
-## Documentation status
+## Project status
 
-This repository includes a curated public source snapshot and documentation. Publication is not a security audit or a deployed-binary verification. The guide is dated **6 November 2026**; packaging it for GitHub does not constitute a fresh production verification. Its operational-readiness notes remain part of the guide.
+This is a public source snapshot, not a verified build of the deployed binary or an independent security audit. The [launch guide](docs/launch-guide.md#operational-readiness) preserves dated operational-readiness notes. Some tests require separately obtained chain fixtures or locally built binaries; production configuration and secrets are excluded.
 
-Fees and rules differ by route. Read the coin's verified settings and transaction quote. Pill-first trading does not make transactions private or guarantee that automated trading is impossible.
-
-Pill is an independent launchpad, not affiliated with Pump.fun. External protocol names identify integrations.
+Pill is independent of Pump.fun. Pangea and Pump integrations depend on their respective providers. Third-party notices remain with their files; no first-party reuse license is granted by publication alone.
