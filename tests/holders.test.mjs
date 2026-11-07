@@ -1,0 +1,8 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';import {DatabaseSync} from 'node:sqlite';import {Keypair} from '@solana/web3.js';import {Holders} from '../services/api/holders.mjs';import {addresses,u64} from '../sdk/src/instructions.mjs';
+test('holder snapshots use finalized program positions, exact supply shares and shared cache',async()=>{
+ const db=new DatabaseSync(':memory:'),program=Keypair.generate().publicKey,mint=Keypair.generate().publicKey,owner=Keypair.generate().publicKey,a=addresses(program,mint,owner);
+ db.exec('CREATE TABLE coins(mint TEXT,phase TEXT,version INTEGER,creator TEXT,launch TEXT)');db.prepare('INSERT INTO coins VALUES(?,?,?,?,?)').run(mint.toBase58(),'curve',11,owner.toBase58(),a.launch.toBase58());let calls=0;
+ const connection={getTokenSupply:async()=>{calls++;return {context:{slot:10},value:{amount:'1000000000000000'}}},getProgramAccounts:async(p,options)=>{assert.equal(options.commitment,'finalized');assert.equal(options.filters[1].memcmp.bytes,a.launch.toBase58());return {context:{slot:10},value:[{pubkey:a.position,account:{owner:program,executable:false,data:Buffer.concat([createHash('sha256').update('account:Position').digest().subarray(0,8),owner.toBuffer(),a.launch.toBuffer(),u64('30000000000000'),u64('0'),u64('0'),Buffer.alloc(32),u64('0')])}}]}}};
+ const service=new Holders({connection,db,program});const results=await Promise.all([service.read(mint),service.read(mint)]);assert.equal(calls,1);assert.equal(results[0].holders[0].supplyBps,300);assert.equal(results[0].holders[0].role,'dev');await service.read(mint);assert.equal(calls,1);
+ await assert.rejects(service.read(Keypair.generate().publicKey),/coin_not_found/);db.close();
+});
