@@ -1,0 +1,22 @@
+{
+  "name": "mint-launchpad-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build": "node build.mjs",
+    "dev": "python3 dev-server.py"
+  },
+  "dependencies": {
+    "@solana/web3.js": "1.98.4",
+    "@solana/spl-token": "0.4.14",
+    "@noble/hashes": "1.8.0",
+    "buffer": "6.0.3",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "@privy-io/react-auth": "3.45.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  }
+}
